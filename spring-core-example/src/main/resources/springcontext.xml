@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="testBean" class="com.springcoreexample.pojos.TestCarImpl" lazy-init="true">
+        <property name="carName" value="Test Bean"/>
+    </bean>
+    <bean id="wheelBean" class="com.springcoreexample.pojos.TestWheelImpl" scope="prototype">
+        <property name="wheelName" value="Test Wheel"/>
+    </bean>
+    <bean id="engineBean" class="com.springcoreexample.pojos.TestEngineImpl" scope="prototype">
+        <property name="engineName" value="Test Engine"/>
+    </bean>
+
+    <bean id="carSingleton" class="com.springcoreexample.pojos.TestCarImpl" scope="singleton" lazy-init="false">
+        <property name="carName" value="Car Singleton"/>
+    </bean>
+    <bean id="carPrototype" class="com.springcoreexample.pojos.TestCarImpl" scope="prototype" lazy-init="false">
+        <property name="carName" value="Car Prototype"/>
+    </bean>
+
+    <bean id="carConstructorInjection" class="com.springcoreexample.pojos.TestCarImpl">
+        <property name="carName" value="Car Constructor Injection"/>
+        <constructor-arg type="com.springcoreexample.pojos.Engine" ref="engineBean"/>
+        <constructor-arg type="com.springcoreexample.pojos.Wheel" ref="wheelBean"/>
+        <constructor-arg type="com.springcoreexample.pojos.Wheel" ref="wheelBean"/>
+        <constructor-arg type="com.springcoreexample.pojos.Wheel" ref="wheelBean"/>
+        <constructor-arg type="com.springcoreexample.pojos.Wheel" ref="wheelBean"/>
+    </bean>
+
+    <bean id="carSetterInjection" class="com.springcoreexample.pojos.TestCarImpl">
+        <property name="carName" value="Car Setter Injection"/>
+        <property name="engine" ref="engineBean"/>
+        <property name="frontRightWheel" ref="wheelBean"/>
+        <property name="frontLeftWheel" ref="wheelBean"/>
+        <property name="rearRightWheel" ref="wheelBean"/>
+        <property name="rearLeftWheel" ref="wheelBean"/>
+    </bean>
+
+    <!--Beans for test of autowire injection-->
+    <bean id="engine" class="com.springcoreexample.pojos.TestEngineImpl" scope="prototype">
+        <property name="engineName" value="Test Engine"/>
+    </bean>
+    <bean id="frontRightWheel" class="com.springcoreexample.pojos.TestWheelImpl" scope="prototype">
+        <property name="wheelName" value="Test Front Right Wheel"/>
+    </bean>
+    <bean id="frontLeftWheel" class="com.springcoreexample.pojos.TestWheelImpl" scope="prototype">
+        <property name="wheelName" value="Test Front Left Wheel"/>
+    </bean>
+    <bean id="rearRightWheel" class="com.springcoreexample.pojos.TestWheelImpl" scope="prototype">
+        <property name="wheelName" value="Test Rear Right Wheel"/>
+    </bean>
+    <bean id="rearLeftWheel" class="com.springcoreexample.pojos.TestWheelImpl" scope="prototype">
+        <property name="wheelName" value="Test Rear Left Wheel"/>
+    </bean>
+
+    <bean id="carAutowireByName" class="com.springcoreexample.pojos.TestCarImpl" autowire="byName">
+        <property name="carName" value="Car Autowire By Name"/>
+    </bean>
+
+    <bean id="carLifeCycle" class="com.springcoreexample.pojos.TestCarImpl" scope="prototype" init-method="init" destroy-method="delete">
+        <property name="carName" value="Car Life Cycle"/>
+        <property name="engine" ref="engineBean"/>
+        <property name="frontRightWheel" ref="frontRightWheel"/>
+        <property name="frontLeftWheel" ref="frontLeftWheel"/>
+        <property name="rearRightWheel" ref="rearRightWheel"/>
+        <property name="rearLeftWheel" ref="rearLeftWheel"/>
+    </bean>
+</beans>

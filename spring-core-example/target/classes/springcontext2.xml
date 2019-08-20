@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="carAutowireByType" class="com.springcoreexample.pojos.TestCarImpl" autowire="byType">
+        <property name="carName" value="Car Autowire By Type"/>
+    </bean>
+
+    <bean id="wheelBean" class="com.springcoreexample.pojos.TestWheelImpl">
+        <property name="wheelName" value="Test Wheel"/>
+    </bean>
+    <bean id="engineBean" class="com.springcoreexample.pojos.TestEngineImpl">
+        <property name="engineName" value="Test Engine"/>
+    </bean>
+</beans>
